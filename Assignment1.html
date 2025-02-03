@@ -1,0 +1,49 @@
+<!-- EECS 468 Assignment 1 -->
+<!-- Author: Alice J Mungamuri -->
+<!-- Creation Date: February 3, 2025 -->
+<!-- Description: A simple webpage with two buttons that trigger JavaScript functions to display "Hello World!" in different formats. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World!</title>
+    <style>
+        /* Ensures buttons are displayed vertically */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Adds spacing between buttons */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header for the webpage -->
+    <h1>Hello World!</h1>
+    
+    <!-- Container for buttons to align them vertically -->
+    <div class="button-container">
+        <!-- Button 1 triggers an alert with "Hello World!" -->
+        <button onclick="test1()">Test 1 for Hello World!</button>
+        
+        <!-- Button 2 updates the content of a paragraph to display "Hello" and "World!" on separate lines -->
+        <button onclick="test2()">Test 2 for Hello World!</button>
+    </div>
+    
+    <!-- Paragraph where the second test function will display output -->
+    <p id="output"></p>
+
+    <script>
+        // Function to display an alert with "Hello World!"
+        function test1() {
+            alert("Hello World!");
+        }
+
+        // Function to modify the paragraph's content to display "Hello" and "World!" on separate lines
+        function test2() {
+            document.getElementById("output").innerHTML = "Hello<br>World!";
+        }
+    </script>
+</body>
+</html>
