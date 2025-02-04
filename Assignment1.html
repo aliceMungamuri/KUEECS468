@@ -16,39 +16,38 @@
            
         }
 
-        /* Styles the buttons to be shorter horizontally */
-        button {
-            width: 150px; /* Adjust the width as needed */
-            padding: 5px; /* Adjust padding for a balanced look */
-            text-align: center; /* Ensures text remains centered */
+        button { 
+            width: 150px; /* makes it so the button isnt long - STACK OVERFLOW*/
+            padding: 5px; /* adds padding between the text and box*/
+            text-align: center; /* centers the text */
         }
     </style>
 </head>
 <body>
-    <!-- Header for the webpage -->
+    <!-- Header -->
     <h1>Hello World!</h1>
     
-    <!-- Container for buttons to align them vertically -->
+    <!-- stacks them on top -->
     <div class="button-container">
-        <!-- Button 1 triggers an alert with "Hello World!" -->
+        <!-- Button 1 triggers an alert (this satifys the rubric )with "Hello World!" -->
         <button onclick="test1()">Test 1 for Hello World!</button>
         
-        <!-- Button 2 updates the content of a paragraph to display "Hello" and "World!" on separate lines -->
+        <!-- button displays Hello World! on diff lines-->
         <button onclick="test2()">Test 2 for Hello World!</button>
     </div>
     
-    <!-- Paragraph where the second test function will display output -->
+    <!-- this is just the empty paragraph w the id output -->
     <p id="output"></p>
 
     <script>
-        // Function to display an alert with "Hello World!"
+        // display  "Hello World!"
         function test1() {
             alert("Hello World!");
         }
 
-        // Function to modify the paragraph's content to display "Hello" and "World!" on separate lines
+        //  display hello and world! on separate lines
         function test2() {
-            document.getElementById("output").innerHTML = "Hello<br>World!";
+            document.getElementById("output").innerHTML = "Hello<br>World!"; // br makes the line break btw
         }
     </script>
 </body>
