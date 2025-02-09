@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EECS 468 Assignment 2</title>
+</head>
+<body>
+    <script>
+        /*
+        EECS 468 Assignment 2
+        Author: Alice J Mungamuri
+        Creation Date: February 9, 2025
+        Description: This script contains solutions to three exercises from Chapter 2 of Eloquent JavaScript.
+        Inputs: None
+        Output: Console and document write output for each exercise.
+        */
+
+        // Exercise 2.1 - Looping a Triangle
+        document.write("<h3>Looping a Triangle</h3>");
+        let triangle = "";
+        for (let i = 0; i < 10; i++) {
+            triangle += "x";
+            document.write(triangle + "<br>");
+        }
+
+        // Exercise 2.2 - FizzBuzz (Modified Rules)
+        document.write("<h3>FizzBuzz</h3>");
+        for (let i = 1; i <= 100; i++) {
+            if (i % 4 === 0 && i % 7 === 0) {
+                document.write("Divisible by both 4 and 7<br>");
+            } else if (i % 4 === 0) {
+                document.write("Divisible by 4<br>");
+            } else if (i % 7 === 0) {
+                document.write("Divisible by 7, but not 4<br>");
+            } else {
+                document.write(i + "<br>");
+            }
+        }
+
+        // Exercise 2.3 - n-by-n Grid
+        function generateGrid(size) {
+            document.write("<h3>Size = " + size + "</h3>");
+            let grid = "";
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    grid += (i + j) % 2 === 0 ? "* " : "&nbsp";
+                }
+                grid += "<br>";
+            }
+            document.write(grid);
+        }
+
+        generateGrid(8);
+        generateGrid(14);
+    </script>
+</body>
+</html>
