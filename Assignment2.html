@@ -12,6 +12,8 @@
         Author: Alice J Mungamuri
         Student id : 3117704
         Creation Date: February 9, 2025
+        inputs : none really
+        outputs: grids, 1-100 divisibility, triangle
      
         */
 
@@ -45,11 +47,11 @@
             let grid = "";// makes it an empty grid
             for (let i = 0; i < size; i++) {// repeats size number of times
                 for (let j = 0; j < size; j++) { //makes the rows
-                    grid += (i + j) % 2 === 0 ? "&nbsp" : "* ";// this is courtesy of stackoverflow bc DANG - this creates the checkered pattern
+                    grid += (i + j) % 2 === 0 ? "&nbsp" : "* ";// this is courtesy of stackoverflow bc DANG - this creates the checkered pattern and I made it so the first line is a space
                 }
-                grid += "<br>";
+                grid += "<br>"; //add a break
             }
-            document.write(grid);
+            document.write(grid);// prints the grid
         }
 // here you can call any different size n by n grid that you want
         generateGrid(8);
