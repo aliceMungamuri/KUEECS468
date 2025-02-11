@@ -1,56 +1,57 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- declares the document as a html file,  and makes the doc language English -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EECS 468 Assignment 2</title>
+    <title>Eecs 468 Assignment 2</title>
 </head>
 <body>
-    <script>
+    <script> // starts off the javas script part
         /*
         EECS 468 Assignment 2
         Author: Alice J Mungamuri
+        Student id : 3117704
         Creation Date: February 9, 2025
-        Description: This script contains solutions to three exercises from Chapter 2 of Eloquent JavaScript.
-        Inputs: None
-        Output: Console and document write output for each exercise.
+     
         */
 
         // Exercise 2.1 - Looping a Triangle
-        document.write("<h3>Looping a Triangle</h3>");
-        let triangle = "";
-        for (let i = 0; i < 10; i++) {
-            triangle += "x";
-            document.write(triangle + "<br>");
+        document.write("<h3>Looping a Triangle</h3>"); // this writes an h3 heading to the page
+        let triangle = ""; // this is gonna make the triangle an empty string to get ready for the pattern
+        for (let i = 0; i < 10; i++) { //for loop runs 10 times (0 index)
+            triangle += "x"; // increases by an x each iteration
+            document.write(triangle);// this just makes it write a triangle anf then a line break
+            document.write(="<br>");
         }
 
         // Exercise 2.2 - FizzBuzz (Modified Rules)
-        document.write("<h3>FizzBuzz</h3>");
-        for (let i = 1; i <= 101; i++) {
-            if (i % 4 === 0 && i % 7 === 0) {
-                document.write("Divisible by both 4 and 7<br>");
-            } else if (i % 4 === 0) {
-                document.write("Divisible by 4<br>");
-            } else if (i % 7 === 0) {
-                document.write("Divisible by 7, but not 4<br>");
-            } else {
-                document.write(i + "<br>");
+        document.write("<h3>FizzBuzz</h3>");// prints it out before the actual fizz buzz part
+        for (let i = 1; i <= 101; i++) {// for loop goes 100 times because its 1 to 101 inclusive
+            let num = i;
+            if (num % 4 === 0 && num % 7 === 0) {// if num mod 4 and 7 is tue then theyre both divisible
+                document.write("Divisible by both 4 and 7<br>"); // prints that out instead of num
+            } else if (num % 4 === 0) {// if divisible by 4 
+                document.write("Divisible by 4<br>");// prints that also Im not sure if I didnt the order of checking correctly, i feel like it should be 4 and 7 , then either 4 or 7
+            } else if (num % 7 === 0) {// else is only divisible by 7
+                document.write("Divisible by 7, but not 4<br>");// prints that out
+            } else { // any num not divsible by 4 or 7
+                document.write(num + "<br>"); // pronts out the number
             }
         }
 
         // Exercise 2.3 - n-by-n Grid
-        function generateGrid(size) {
-            document.write("<h3>Size = " + size + "</h3>");
-            let grid = "";
-            for (let i = 0; i < size; i++) {
-                for (let j = 0; j < size; j++) {
-                    grid += (i + j) % 2 === 0 ? "* " : "&nbsp";
+        function makeaGrid(size) {// had to make a function so TA can customize and make diff calls bc IDK if size 8 and 14 have to go at the same time
+            document.write("<h3>Size = " + size + "</h3>");// this prints the size before the grid
+            let grid = "";// makes it an empty grid
+            for (let i = 0; i < size; i++) {// repeats size number of times
+                for (let j = 0; j < size; j++) { //makes the rows
+                    grid += (i + j) % 2 === 0 ? "&nbsp" : "* ";// this is courtesy of stackoverflow bc DANG - this creates the checkered pattern
                 }
                 grid += "<br>";
             }
             document.write(grid);
         }
-
+// here you can call any different size n by n grid that you want
         generateGrid(8);
         generateGrid(14);
     </script>
