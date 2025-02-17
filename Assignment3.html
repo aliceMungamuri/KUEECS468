@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EECS 468 Assignment 3</title>
+</head>
+<body>
+    <script>
+        /*
+         * EECS 468 Assignment 3
+         * This program implements a custom Group class to demonstrate set operations.
+         * It avoids using the built-in Set data structure and includes methods for add, delete,
+         * has, union, intersection, and difference.
+         * 
+         * Author: Alice J Mungamuri
+         * Creation Date: February 17, 2025
+         * Collaborators: None
+         * Other sources: None
+         */
+
+        class Group { // group class
+            constructor() {
+                this.members = []; // makes an empty array for values
+            }
+            
+            add(value) {
+                if (!this.has(value)) { // check so theres no duplicates
+                    this.members.push(value);// adds a value to the group
+                }
+            }
+            
+            delete(value) {
+                this.members = this.members.filter(member => member !== value);// removes from the array making a new array 
+            }
+            
+            has(value) {
+                return this.members.includes(value); // true if its in the group else false
+            }
+            
+            union(otherGroup) {// makes a new group with all unique elements with both groups
+                let newGroup = new Group();
+                this.members.forEach(value => newGroup.add(value)); // Add all from current group
+                otherGroup.members.forEach(value => newGroup.add(value)); // adds the diff values from other group
+                return newGroup;
+            }
+            
+            intersection(otherGroup) { // intersection method
+                let newGroup = new Group();// returns a new Group containing elements in one group but not the other
+                this.members.forEach(value => {
+                    if (otherGroup.has(value)) { // if its in both
+                        newGroup.add(value); // adds the value thats in both
+                    }
+                });
+                return newGroup; // returns the intersection
+            }
+            
+            difference(otherGroup) {
+                let newGroup = new Group();
+                this.members.forEach(value => {
+                    if (!otherGroup.has(value)) {
+                        newGroup.add(value);
+                    }
+                });
+                return newGroup;
+            }
+        }
+
+        // Creating two groups as per assignment instructions
+        let group1 = new Group();
+        let group2 = new Group();
+
+        group1.add(1);
+        group1.add(2);
+        group1.add(3);
+
+        group2.add(2);
+        group2.add(3);
+        group2.add(5);
+        group2.add(2); // Duplicate, won't be added
+
+        // Function to display output on the webpage
+        function displayResult(label, result) {
+            let paragraph = document.createElement("p");
+            paragraph.textContent = `${label}: ${Array.isArray(result) ? result.join(", ") : result}`;
+            document.body.appendChild(paragraph);
+        }
+
+        // Displaying results
+        displayResult("Contents of group1", group1.members);
+        displayResult("Contents of group2", group2.members);
+        displayResult("Results of group1.has(5)", group1.has(5));
+        displayResult("Results of group2.has(3)", group2.has(3));
+        displayResult("Results of group1.union(group2)", group1.union(group2).members);
+        displayResult("Results of group1.intersection(group2)", group1.intersection(group2).members);
+        displayResult("Results of group1.difference(group2)", group1.difference(group2).members);
+
+        group1.delete(1);
+        group2.delete(1);
+
+        displayResult("Results of group1.delete(1)", group1.members);
+        displayResult("Results of group2.delete(1)", group2.members);
+    </script>
+</body>
+</html>
