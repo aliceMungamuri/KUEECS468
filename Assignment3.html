@@ -9,14 +9,12 @@
     <script>
         /*
          * EECS 468 Assignment 3
-         * This program implements a custom Group class to demonstrate set operations.
-         * It avoids using the built-in Set data structure and includes methods for add, delete,
-         * has, union, intersection, and difference.
+       
          * 
          * Author: Alice J Mungamuri
          * Creation Date: February 17, 2025
          * Collaborators: None
-         * Other sources: None
+         * Other sources: stack overflow
          */
 
         class Group { // group class
@@ -55,51 +53,51 @@
                 return newGroup; // returns the intersection
             }
             
-            difference(otherGroup) {
-                let newGroup = new Group();
-                this.members.forEach(value => {
-                    if (!otherGroup.has(value)) {
+            difference(otherGroup) { // edits this file
+                let newGroup = new Group(); // makes a new group
+                this.members.forEach(value => { //for every element in members
+                    if (!otherGroup.has(value)) {// returns a group that exist in one group but not the other
                         newGroup.add(value);
                     }
                 });
-                return newGroup;
+                return newGroup;// returns the new group
             }
         }
 
-        // Creating two groups as per assignment instructions
+        // makes the 2 groups
         let group1 = new Group();
         let group2 = new Group();
 
-        group1.add(1);
-        group1.add(2);
-        group1.add(3);
+        group1.add(1);// adds the values form the assignment
+        group1.add(2);// adds the values form the assignment
+        group1.add(3);// adds the values form the assignment
 
-        group2.add(2);
-        group2.add(3);
-        group2.add(5);
-        group2.add(2); // Duplicate, won't be added
+        group2.add(2);// adds the values form the assignment
+        group2.add(3);// adds the values form the assignment
+        group2.add(5);// adds the values form the assignment
+        group2.add(2); // Duplicate wont be added
 
         // Function to display output on the webpage
-        function displayResult(label, result) {
-            let paragraph = document.createElement("p");
-            paragraph.textContent = `${label}: ${Array.isArray(result) ? result.join(", ") : result}`;
-            document.body.appendChild(paragraph);
+        function displayResult(label, result) { // this controls the display/ the paragraphs 
+            let paragraph = document.createElement("p"); // this makes a new paragraph 
+            paragraph.textContent = `${label}: ${Array.isArray(result) ? result.join(", ") : result}`; // puts it in formatted text /
+            document.body.appendChild(paragraph); // puts the paragraph on the page
         }
 
         // Displaying results
-        displayResult("Contents of group1", group1.members);
-        displayResult("Contents of group2", group2.members);
-        displayResult("Results of group1.has(5)", group1.has(5));
-        displayResult("Results of group2.has(3)", group2.has(3));
-        displayResult("Results of group1.union(group2)", group1.union(group2).members);
-        displayResult("Results of group1.intersection(group2)", group1.intersection(group2).members);
-        displayResult("Results of group1.difference(group2)", group1.difference(group2).members);
+        displayResult("Contents of group1", group1.members); // just the contents
+        displayResult("Contents of group2", group2.members); // contents
+        displayResult("Results of group1.has(5)", group1.has(5)); // I just copied the descriptions from the assignment
+        displayResult("Results of group2.has(3)", group2.has(3)); // results of  group1.has(5
+        displayResult("Results of group1.union(group2)", group1.union(group2).members); //"Results of group1.union(group2)"
+        displayResult("Results of group1.intersection(group2)", group1.intersection(group2).members);//"Results of group1.intersection(group2)",
+        displayResult("Results of group1.difference(group2)", group1.difference(group2).members);//Results of group1.difference(group2)
 
-        group1.delete(1);
-        group2.delete(1);
+        group1.delete(1);// deletes
+        group2.delete(1);//deletes
 
-        displayResult("Results of group1.delete(1)", group1.members);
-        displayResult("Results of group2.delete(1)", group2.members);
+        displayResult("Results of group1.delete(1)", group1.members); //"Results of group1.delete(1)"
+        displayResult("Results of group2.delete(1)", group2.members);//"Results of group2.delete(1)"
     </script>
 </body>
 </html>
