@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mungamuri’s Go KU! Page</title>
+</head>
+<body>
+    <tab-panel>
+        <div data-tabname="Rock">Rock ...</div>
+        <div data-tabname="Chalk">Rock Chalk ...</div>
+        <div data-tabname="Jayhawk">Rock Chalk Jayhawk ...</div>
+        <div data-tabname="Go KU!">Rock Chalk Jayhawk - Go KU!</div>
+    </tab-panel>
+
+    <script>
+        function asTabs(node) {//defs a function takes the DOM element and makes children tabbed
+            let tabButtons = document.createElement("div"); // div container to hold the buttons
+            let tabs = Array.from(node.children);// makes the child elements into an array 
+
+            tabs.forEach((tab, index) => {// goes through each tab
+                let button = document.createElement("button"); // new btton for tab
+                button.textContent = tab.getAttribute("data-tabname"); // makes the button label
+
+                // Default button 
+               
+                button.style.backgroundColor = "lightgray"; // Keep background gray
+                button.style.color = index === 0 ? "red" : "blue"; // Selected tab is red, others are blue
+
+                if (index !== 0) {// hides all the tabs but the first
+                    tab.style.display = "none"; // none hides them
+                }
+
+                button.addEventListener("click", () => {// check when its clicked
+                    // Hide all tabs
+                    tabs.forEach(t => t.style.display = "none");// hides all the tabs before itll show the clicked one
+                    tab.style.display = "block";// shows the clicked tab
+
+                    Array.from(tabButtons.children).forEach(b => b.style.color = "blue");.. all text to blue
+
+                  
+                    button.style.color = "red";// text to red
+                });
+
+                tabButtons.appendChild(button);// after making the button put it in the contained
+            });
+
+            node.insertBefore(tabButtons, node.firstChild);// inserts buttons at the top
+        }
+
+        asTabs(document.querySelector("tab-panel"));// call the function
+    </script> // end script
+</body>
+</html>
+
