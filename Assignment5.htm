@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+      <!--      EECS 468 Assignment 5 - Pie Chart Visualization
+           Author: Alice J Mungamuri
+           Creation Date: March 24, 2025
+           Description: This script generates two pie charts displaying customer satisfaction data.
+                        Each chart includes labeled slices, automatically positioned using trigonometry.
+           Inputs: None (Data is hardcoded in arrays)
+           Output: Two pie charts rendered on the canvas elements
+         -->
+<head>
+    <title>EECS 468 Assignment 5 </title>
+    
+</head>
+<body>
+    <div class="chart-container">
+        <h2>Data Set 1</h2>
+        <canvas id="chart1" width="450" height="450"></canvas>
+    </div>
+    <div class="chart-container">
+        <h2>Data Set 2</h2>
+        <canvas id="chart2" width="450" height="450"></canvas>
+    </div>
+
+    <script>
+
+        function drawPieChart(canvasId, data) { // 2 parameters canvasid and data
+            let canvas = document.getElementById(canvasId); //gets the canvas element using canvasId and stores it in canvas
+            let cx = canvas.getContext("2d"); //gets the 2D drawing context for the canvas
+            let total = data.reduce((sum, { count }) => sum + count, 0); // calculates the total sum of all the count values from the data
+            let currentAngle = -0.5 * Math.PI; // makes it start at-90 degrees so itll start from the top
+            let centerX = canvas.width / 2; // center x
+            let centerY = canvas.height / 2; // center y
+            let radius = 100; // radius
+
+            data.forEach(({ name, count, color }) => { //  loops through each item in the data array - each element has name,count,and color
+                let sliceAngle = (count / total) * 2 * Math.PI;// stack overflow  - angle for each pie slice based on the proportion of count  to total
+                
+                // Draw slice
+                cx.beginPath(); //starts a new drawing path
+                cx.moveTo(centerX, centerY); //moves the drawing cursor to the center
+                cx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle); //draws the pie slice with  start and end angle
+                cx.fillStyle = color; //sets the fill color for the slice
+                cx.fill(); // fills the slice
+                
+                
+                let midAngle = currentAngle + sliceAngle / 2; // Calculate label position
+                let labelX = centerX + Math.cos(midAngle) * (radius + 30); // moves it further x
+                let labelY = centerY + Math.sin(midAngle) * (radius + 30);// moves it further y
+                
+                cx.textAlign = labelX > centerX ? "left" : "right";    // Align text properly
+                cx.textBaseline = "middle"; // label is in center vertical 
+                
+                
+                cx.fillStyle = "black"; // Draw label
+                cx.font = "14px Georgia";// font
+                cx.fillText(name, labelX, labelY);// draws label at that pos
+                
+               
+                currentAngle += sliceAngle; // Move to next slice
+            });
+        }
+
+        
+        const dataSet1 = [// Data Set 1
+            { name: "Very happy", count: 63, color: "lightblue" }, // first element
+            { name: "Happy", count: 104, color: "lightgreen" },// 2 element
+            { name: "Neutral", count: 87, color: "pink" },// 3 element
+            { name: "Unhappy", count: 36, color: "orange" },// 4 element
+            { name: "Very unhappy", count: 26, color: "yellow" },// 5 element
+            { name: "No comment", count: 18, color: "gray" }// 6 element
+        ];
+
+        
+        const dataSet2 = [// Data Set 2
+            { name: "Satisfied", count: 213, color: "lightblue" },// first element
+            { name: "Neutral", count: 927, color: "lightgreen" },// 2 element
+            { name: "Unsatisfied", count: 463, color: "pink" },// 3 element
+            { name: "No comment", count: 256, color: "gray" }// 4 element
+        ];
+
+        drawPieChart("chart1", dataSet1);// Draw  pie charts 1
+        drawPieChart("chart2", dataSet2); // Draw  pie charts 2
+    </script>
+</body>
+</html>
