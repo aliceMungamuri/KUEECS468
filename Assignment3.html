@@ -1,100 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EECS 468 Assignment 3</title>
-</head>
-<body>
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <meta charset="utf-8"> 
+    <title>Assignment 3</title> 
+</head> 
+<body> 
     <script>
         /*
          * EECS 468 Assignment 3
-       
-         * 
-         * Author: Alice J Mungamuri
-         * Creation Date: February 17, 202
-         * Other sources: stack overflow
+         * author: Alice J Mungamuri
+         * creation date: February 17, 2025
+         * other sources: stack overflow
          */
 
-        class Group { // group class
+        class Group {
             constructor() {
-                beginnerGroup.nums = []; // makes an empty array for values
+                this.group = []; // makes an empty array to hold group values
             }
-            
+
             add(value) {
-                if (!beginnerGroup.has(value)) { // check so theres no duplicates
-                    beginnerGroup.nums.push(value);// adds a value to the group
+                if (!this.has(value)) { // checks for duplicates
+                    this.group.push(value); // adds the value to the group
                 }
             }
-            
+
             delete(value) {
-                beginnerGroup.nums = beginnerGroup.nums.filter(member => member !== value);// removes from the array making a new array 
+                let index = this.group.indexOf(value); // finds the value's index
+                if (index !== -1) { // if the value is in the group
+                    this.group.splice(index, 1); // removes it using splice
+                }
             }
-            
+
             has(value) {
-                return beginnerGroup.nums.includes(value); // true if its in the group else false
+                return this.group.includes(value); // returns true or false
             }
-            
-            union(diffGroup) {// makes a new group with all unique elements with both groups
-                let newGroup = new Group();
-                beginnerGroup.nums.forEach(value => newGroup.add(value)); // Add all from current group
-                diffGroup.nums.forEach(value => newGroup.add(value)); // adds the diff values from other group
-                return newGroup;
+
+            union(otherGroup) {
+                let newGroup = new Group(); // new group for the result
+                this.group.forEach(e => newGroup.add(e)); // adds values from this group
+                otherGroup.group.forEach(e => newGroup.add(e)); // adds values from the other group
+                return newGroup; // returns the union
             }
-            
-            intersection(diffGroup) { // intersection method
-                let newGroup = new Group();// returns a new Group containing elements in one group but not the other
-                beginnerGroup.nums.forEach(value => {
-                    if (diffGroup.has(value)) { // if its in both
-                        newGroup.add(value); // adds the value thats in both
+
+            intersect(otherGroup) {
+                let newGroup = new Group(); // new group for intersection
+                this.group.forEach(e => {
+                    if (otherGroup.has(e)) { // if both groups have the value
+                        newGroup.add(e); // adds it to the result
                     }
                 });
-                return newGroup; // returns the intersection
+                return newGroup; // returns intersection
             }
-            
-            difference(diffGroup) { // edits beginnerGroup file ** stack overflow
-                let newGroup = new Group(); // makes a new group
-                beginnerGroup.nums.forEach(value => { //for every element in nums
-                    if (!diffGroup.has(value)) {// returns a group that exist in one group but not the other
-                        newGroup.add(value);
+
+            difference(otherGroup) {
+                let newGroup = new Group(); // new group for difference
+                this.group.forEach(e => {
+                    if (!otherGroup.has(e)) { // if value is only in this group
+                        newGroup.add(e); // adds it to result
                     }
                 });
-                return newGroup;// returns the new group
+                return newGroup; // returns the difference
+            }
+
+            toString() {
+                return `{ ${this.group.join(", ")} }`; // shows values with commas inside curly braces
             }
         }
 
-        // makes the 2 groups
-        let group1 = new Group(); // makes the new groups
-        let group2 = new Group();
-        group1.add(1);// adds the values form the assignment
-        group1.add(2);// adds the values form the assignment
-        group1.add(3);// adds the values form the assignment
-        group2.add(2);// adds the values form the assignment
-        group2.add(3);// adds the values form the assignment
-        group2.add(5);// adds the values form the assignment
-        group2.add(2); // Duplicate wont be added
+        let group1 = new Group(); // creates group1
+        let group2 = new Group(); // creates group2
+        group1.add(1); // adds 1 to group1
+        group1.add(2); // adds 2 to group1
+        group1.add(3); // adds 3 to group1
+        group2.add(2); // adds 2 to group2
+        group2.add(3); // adds 3 to group2
+        group2.add(5); // adds 5 to group2
+        group2.add(2); // duplicate, will be ignored
 
-        // outputs the labels and results - labels taken from the assignment
-        function displayResult(label, result) { // beginnerGroup controls the display/ the paragraphs 
-            let paragraph = document.createElement("p"); // beginnerGroup makes a new paragraph 
-            paragraph.textContent = `${label}: ${Array.isArray(result) ? result.join(", ") : result}`; // puts it in formatted text /
-            document.body.appendChild(paragraph); // puts the paragraph on the page
-        }
+        document.write(`<p><strong>Contents of group1:</strong> ${group1.toString()}</p>`); // a
+        document.write(`<p><strong>Contents of group2:</strong> ${group2.toString()}</p>`); // b
+        document.write(`<p><strong>Results of group1.has(5):</strong> ${group1.has(5)}</p>`); // c
+        document.write(`<p><strong>Results of group2.has(3):</strong> ${group2.has(3)}</p>`); // d
+        document.write(`<p><strong>Results of group1.union(group2):</strong> ${group1.union(group2).toString()}</p>`); // e
+        document.write(`<p><strong>Results of group1.intersection(group2):</strong> ${group1.intersect(group2).toString()}</p>`); // f
+        document.write(`<p><strong>Results of group1.difference(group2):</strong> ${group1.difference(group2).toString()}</p>`); // g
 
-        // Displaying results
-        displayResult("Contents of group1", group1.nums); // just the contents
-        displayResult("Contents of group2", group2.nums); // contents
-        displayResult("Results of group1.has(5)", group1.has(5)); // I just copied the descriptions from the assignment
-        displayResult("Results of group2.has(3)", group2.has(3)); // results of  group1.has(5
-        displayResult("Results of group1.union(group2)", group1.union(group2).nums); //"Results of group1.union(group2)"
-        displayResult("Results of group1.intersection(group2)", group1.intersection(group2).nums);//"Results of group1.intersection(group2)",
-        displayResult("Results of group1.difference(group2)", group1.difference(group2).nums);//Results of group1.difference(group2)
+        group1.delete(1); // deletes 1 from group1
+        group2.delete(1); // tries to delete 1 from group2 (not there)
 
-        group1.delete(1);// deletes
-        group2.delete(1);//deletes
-
-        displayResult("Results of group1.delete(1)", group1.nums); //"Results of group1.delete(1)"
-        displayResult("Results of group2.delete(1)", group2.nums);//"Results of group2.delete(1)"
-    </script>
-</body>
+        document.write(`<p><strong>Results of group1.delete(1):</strong> ${group1.toString()}</p>`); // h
+        document.write(`<p><strong>Results of group2.delete(1):</strong> ${group2.toString()}</p>`); // i
+    </script> 
+</body> 
 </html>
